@@ -5,6 +5,7 @@
 
 #include "types.h"
 #include "device.h"
+#include "gen.h"
 
 static PyMethodDef methods[] = {
     { "device_get_installed_count", device_get_installed_count, METH_NOARGS, "Gets installed device count" },
@@ -28,7 +29,7 @@ static struct PyModuleDef module = {
 // Initializes our module using our above struct
 PyMODINIT_FUNC PyInit_k4a(void)
 {
-    if (!initTypes()) {
+    if (!initTypes() || !initGenTypes()) {
         return NULL;
     }
 
@@ -37,10 +38,12 @@ PyMODINIT_FUNC PyInit_k4a(void)
         return NULL;
     }
 
-    if (!addTypes(mod)) {
+    if (!addTypes(mod) || !addGenTypes(mod)) {
         Py_DECREF(mod);
         return NULL;
     }
+
+    registerEnums(mod);
 
     return mod;
 }

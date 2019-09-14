@@ -7,7 +7,10 @@ if k4a.device_open(0, dev):
     print("Opened device {} {}\n".format(serial, version))
 
     config = k4a.DeviceConfiguration()
-    config.
+    config.camera_fps = k4a.K4A_FRAMES_PER_SECOND_15
+    config.color_format = k4a.K4A_IMAGE_FORMAT_COLOR_BGRA32
+    config.color_resolution = k4a.K4A_COLOR_RESOLUTION_3072P
+
     if k4a.device_start_cameras(dev, config):
         k4a.device_stop_cameras(dev)
     else:

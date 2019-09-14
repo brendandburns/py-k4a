@@ -12,13 +12,13 @@ typedef struct {
 
 typedef struct {
     PyObject_HEAD
-    uint32_t color_format;
-    uint32_t color_resolution;
-    uint32_t depth_mode;
-    uint32_t camera_fps;
+    k4a_image_format_t color_format;
+    k4a_color_resolution_t color_resolution;
+    k4a_depth_mode_t depth_mode;
+    k4a_fps_t camera_fps;
     bool synchronized_images_only;
     int32_t depth_delay_off_color_usec;
-    uint32_t wired_sync_mode;
+    k4a_wired_sync_mode_t wired_sync_mode;
     uint32_t subordinate_delay_off_master_usec;
     bool disable_streaming_indicator;
 } DeviceConfiguration;
@@ -39,5 +39,6 @@ void Hardware_dealloc(HardwareVersion* self);
 
 bool initTypes();
 bool addTypes();
+void registerEnums(PyObject *mod);
 
 #endif
