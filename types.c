@@ -101,10 +101,58 @@ static PyTypeObject HardwareType = {
     .tp_members = Hardware_members,
 };
 
+void Capture_dealloc(CaptureObject* self) {
+    if (self->capture != NULL) {
+        k4a_capture_release(self->capture);
+    }
+}
+
+void Capture_init(CaptureObject* self, PyObject* args, PyObject* kwds) {
+    self->capture = NULL;
+}
+
+static PyTypeObject CaptureType = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "k4a.Capture",
+    .tp_doc = "Kinect for Azure Device",
+    .tp_basicsize = sizeof(CaptureObject),
+    .tp_itemsize = 0,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_new = PyType_GenericNew,
+    .tp_dealloc = (destructor) Capture_dealloc,
+};
+
+void Image_dealloc(ImageObject* self) {
+    if (self->image) {
+        k4a_image_release(self->image);
+    }
+}
+
+static PyTypeObject ImageType = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+    .tp_name = "k4a.Image",
+    .tp_doc = "Kinect for Azure Device",
+    .tp_basicsize = sizeof(ImageObject),
+    .tp_itemsize = 0,
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_new = PyType_GenericNew,
+    .tp_dealloc = (destructor) Image_dealloc,
+};
+
+ImageObject* newImageObject() {
+    ImageObject* res = PyObject_New(ImageObject, &ImageType);
+    PyObject_Init((PyObject*) res, &ImageType);
+
+    return res;
+}
+
 bool initTypes()
 {
     if (PyType_Ready(&DeviceType) < 0 ||
-        PyType_Ready(&DeviceConfigurationType) < 0)
+        PyType_Ready(&DeviceConfigurationType) < 0 ||
+        PyType_Ready(&CaptureType) < 0 ||
+        PyType_Ready(&ImageType) < 0
+    )
     {
         return false;
     }
@@ -115,11 +163,18 @@ bool addTypes(PyObject *mod)
 {
     Py_INCREF(&DeviceType);
     Py_INCREF(&DeviceConfigurationType);
+    Py_INCREF(&CaptureType);
+    Py_INCREF(&ImageType);
     if (PyModule_AddObject(mod, "Device", (PyObject *)&DeviceType) < 0 ||
-        PyModule_AddObject(mod, "DeviceConfiguration", (PyObject *)&DeviceConfigurationType) < 0)
+        PyModule_AddObject(mod, "DeviceConfiguration", (PyObject *)&DeviceConfigurationType) < 0 ||
+        PyModule_AddObject(mod, "Capture", (PyObject*) &CaptureType) < 0 ||
+        PyModule_AddObject(mod, "Image", (PyObject*) &ImageType) < 0
+    )
     {
         Py_DECREF(&DeviceType);
         Py_DECREF(&DeviceConfigurationType);
+        Py_DECREF(&CaptureType);
+        Py_DECREF(&ImageType);
         return false;
     }
     return true;

@@ -4,6 +4,7 @@
 #include <k4a/k4a.h>
 
 #include "types.h"
+#include "capture.h"
 #include "device.h"
 #include "gen.h"
 
@@ -15,6 +16,13 @@ static PyMethodDef methods[] = {
     { "device_get_serialnum", device_get_serial_num, METH_VARARGS, "Get device serial number"},
     { "device_start_cameras", device_start_cameras, METH_VARARGS, "Start device cameras"},
     { "device_stop_cameras", device_stop_cameras, METH_VARARGS, "Stop device cameras"},
+    { "device_get_capture", device_get_capture, METH_VARARGS, "Get a capture"},
+    { "capture_get_depth_image", py_capture_get_depth_image, METH_VARARGS, "Get a depth image"},
+    { "capture_get_color_image", py_capture_get_color_image, METH_VARARGS, "Get a color image"},
+    { "image_get_buffer", py_image_get_buffer, METH_VARARGS, "Get buffer from an image"},
+    { "image_get_width_pixels", py_image_get_width_pixels, METH_VARARGS, "Get the image width"},
+    { "image_get_height_pixels", py_image_get_height_pixels, METH_VARARGS, "Get the image height"},
+    { "image_get_stride_bytes", py_image_get_stride_bytes, METH_VARARGS, "Get stride width in bytes"},
     { NULL, NULL, 0, NULL }
 };
 

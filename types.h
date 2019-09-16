@@ -37,6 +37,18 @@ typedef struct {
 
 void Hardware_dealloc(HardwareVersion* self);
 
+typedef struct {
+    PyObject_HEAD
+    k4a_capture_t capture;
+} CaptureObject;
+
+typedef struct {
+    PyObject_HEAD
+    k4a_image_t image;
+} ImageObject;
+
+ImageObject* newImageObject();
+
 bool initTypes();
 bool addTypes();
 void registerEnums(PyObject *mod);
