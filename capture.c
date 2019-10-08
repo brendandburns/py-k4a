@@ -81,3 +81,23 @@ PyObject* py_image_get_stride_bytes(PyObject* self, PyObject* args)
 
     return PyLong_FromLong(k4a_image_get_stride_bytes(obj->image));
 }
+
+PyObject* py_image_release(PyObject* self, PyObject* args)
+{
+    ImageObject* obj;
+    PyArg_ParseTuple(args, "O", &obj);
+
+    k4a_image_release(obj->image);
+
+    return Py_None;
+}
+
+PyObject* py_capture_release(PyObject* self, PyObject* args)
+{
+    CaptureObject* obj;
+    PyArg_ParseTuple(args, "O", &obj);
+
+    k4a_capture_release(obj->capture);
+
+    return Py_None;
+}
