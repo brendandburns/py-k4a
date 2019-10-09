@@ -32,6 +32,9 @@ if k4a.device_open(0, dev):
                         fp.write(k4a.image_get_buffer(img))
                         fp.flush()
                         fp.close()
+
+                        k4a.image_release(img) #I think this is working
+                        k4a.capture_release(capture) #I don't think this is working
                 except:
                     import sys
                     print("Unexpected error:", sys.exc_info()[0])
