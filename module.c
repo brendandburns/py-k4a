@@ -23,6 +23,8 @@ static PyMethodDef methods[] = {
     { "image_get_width_pixels", py_image_get_width_pixels, METH_VARARGS, "Get the image width"},
     { "image_get_height_pixels", py_image_get_height_pixels, METH_VARARGS, "Get the image height"},
     { "image_get_stride_bytes", py_image_get_stride_bytes, METH_VARARGS, "Get stride width in bytes"},
+    { "image_release", py_image_release, METH_VARARGS, "Release image"},
+    { "capture_release", py_capture_release, METH_VARARGS, "Release capture"},
     { NULL, NULL, 0, NULL }
 };
 
