@@ -90,12 +90,6 @@ PyObject *device_start_cameras(PyObject *self, PyObject *args)
 
     // TODO convert this to use the native object.
     k4a_device_configuration_t k4a_conf = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
-/*
-    k4a_conf.color_format = K4A_IMAGE_FORMAT_COLOR_MJPG;
-    k4a_conf.color_resolution = K4A_COLOR_RESOLUTION_2160P;
-    k4a_conf.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
-    k4a_conf.camera_fps = K4A_FRAMES_PER_SECOND_30;
-*/
     k4a_conf.color_format = config->color_format;
     k4a_conf.color_resolution = config->color_resolution;
     k4a_conf.depth_mode = config->depth_mode;
@@ -117,6 +111,24 @@ PyObject *device_stop_cameras(PyObject *self, PyObject *args)
     PyArg_ParseTuple(args, "O", &obj);
 
     k4a_device_stop_cameras(obj->device);
+
+    return Py_None;
+}
+
+PyObject *device_start_imu(PyObject *self, PyObject *args)
+{
+    DeviceObject *obj;
+    PyArg_ParseTuple(args, "O", &obj);
+
+    return k4a_device_start_imu(obj->device) == K4A_RESULT_SUCCEEDED ? Py_True: Py_False;
+}
+
+PyObject *device_stop_imu(PyObject *self, PyObject *args)
+{
+    DeviceObject *obj;
+    PyArg_ParseTuple(args, "O", &obj);
+
+    k4a_device_stop_imu(obj->device);
 
     return Py_None;
 }

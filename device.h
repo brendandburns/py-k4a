@@ -8,3 +8,5 @@ PyObject* device_get_version(PyObject* self, PyObject* args);
 PyObject* device_close(PyObject* self, PyObject* args);
 PyObject* device_start_cameras(PyObject* self, PyObject* args);
 PyObject* device_stop_cameras(PyObject* self, PyObject* args);
+PyObject* device_start_imu(PyObject* self, PyObject* args);
+PyObject* device_stop_imu(PyObject* self, PyObject* args);

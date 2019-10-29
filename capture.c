@@ -81,3 +81,11 @@ PyObject* py_image_get_stride_bytes(PyObject* self, PyObject* args)
 
     return PyLong_FromLong(k4a_image_get_stride_bytes(obj->image));
 }
+
+PyObject* py_image_get_device_timestamp_usec(PyObject* self, PyObject* args)
+{
+    ImageObject* obj;
+    PyArg_ParseTuple(args, "O", &obj);
+
+    return PyLong_FromUnsignedLong(k4a_image_get_device_timestamp_usec(obj->image));
+}

@@ -16,6 +16,8 @@ static PyMethodDef methods[] = {
     { "device_get_serialnum", device_get_serial_num, METH_VARARGS, "Get device serial number"},
     { "device_start_cameras", device_start_cameras, METH_VARARGS, "Start device cameras"},
     { "device_stop_cameras", device_stop_cameras, METH_VARARGS, "Stop device cameras"},
+    { "device_start_imu", device_start_imu, METH_VARARGS, "Start device IMU"},
+    { "device_stop_imu", device_stop_imu, METH_VARARGS, "Stop device IMU"},
     { "device_get_capture", device_get_capture, METH_VARARGS, "Get a capture"},
     { "capture_get_depth_image", py_capture_get_depth_image, METH_VARARGS, "Get a depth image"},
     { "capture_get_color_image", py_capture_get_color_image, METH_VARARGS, "Get a color image"},
@@ -23,6 +25,7 @@ static PyMethodDef methods[] = {
     { "image_get_width_pixels", py_image_get_width_pixels, METH_VARARGS, "Get the image width"},
     { "image_get_height_pixels", py_image_get_height_pixels, METH_VARARGS, "Get the image height"},
     { "image_get_stride_bytes", py_image_get_stride_bytes, METH_VARARGS, "Get stride width in bytes"},
+    { "image_get_device_timestamp_usec", py_image_get_device_timestamp_usec, METH_VARARGS, "Get image timestamp"},
     { NULL, NULL, 0, NULL }
 };
 
