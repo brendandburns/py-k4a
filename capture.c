@@ -46,6 +46,21 @@ PyObject* py_capture_get_color_image(PyObject* self, PyObject* args)
     return (PyObject*) imgObj;
 }
 
+PyObject* py_capture_get_ir_image(PyObject* self, PyObject* args)
+{
+    CaptureObject* obj;
+    PyArg_ParseTuple(args, "O", &obj);
+
+    ImageObject* imgObj = newImageObject();
+    imgObj->image = k4a_capture_get_ir_image(obj->capture);
+
+    if (imgObj->image == NULL) {
+        return Py_None;
+    }
+
+    return (PyObject*) imgObj;
+}
+
 
 PyObject* py_image_get_buffer(PyObject* self, PyObject* args)
 {

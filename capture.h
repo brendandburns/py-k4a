@@ -10,6 +10,7 @@
 PyObject* device_get_capture(PyObject* self, PyObject* args);
 PyObject* py_capture_get_depth_image(PyObject* self, PyObject* args);
 PyObject* py_capture_get_color_image(PyObject* self, PyObject* args);
+PyObject* py_capture_get_ir_image(PyObject* self, PyObject* args);
 PyObject* py_image_get_buffer(PyObject* self, PyObject* args);
 PyObject* py_image_get_width_pixels(PyObject* self, PyObject* args);
 PyObject* py_image_get_height_pixels(PyObject* self, PyObject* args);
